@@ -1,0 +1,56 @@
+drop table if exists BOOK, USER, ROLE, BOOK_SALES, BOOK_INVENTORY, BOOK_RATINGS;
+
+
+create table BOOK (
+	ISBN13 varchar(13) not null,
+	TITLE varchar(100) not null,
+	AUTHOR varchar(50) not null,
+	PUBLISH_DATE timestamp not null,
+	CONTENT varchar(200) not null,
+	PRICE float(5,2) not null,
+	STATUS varchar(10),
+	constraint STATUS_CQ check( STATUS in ( 'DRAFT' , 'PUBLISHED' ) ),
+	constraint ISBN13_PK primary key ( ISBN13 )
+);
+
+create table USER (
+	ID varchar(10) not null,
+	NAME varchar(50) not null,
+	PASSWORD varchar(16) not null,
+	MOBILE_NO varchar(13),
+	EMAIL_ID varchar(30) not null,
+	ACTIVE varchar(10) not null,
+	ROLE varchar(20),
+	constraint ID_PK primary key ( ID )
+);
+
+create table ROLE (
+	ID varchar(10) not null,
+	NAME varchar(10) not null,
+	constraint NAME_CQ check( NAME in ('AUTHOR', 'USER', 'ADMIN')),
+	constraint ID_PK primary key ( ID ),
+	constraint ID_FK foreign key ( ID ) references USER (ID) on delete cascade on update cascade
+);
+
+create table BOOK_SALES (
+	SALES_ID varchar(10) not null,
+	USER_ID varchar(10) not null,
+	BOOK_ID varchar(10) not null,
+	QTY varchar(2) not null,
+	TOTAL_AMOUNT varchar(10) not null,
+	STATUS varchar(10) not null,
+	SALE_DATE timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+	constraint STATUS_CQ check( STATUS in ('BOOKED', 'CANCELLED', 'DELIVERED'))
+);
+
+create table BOOK_INVENTORY (
+	BOOK_ID varchar(10) not null,
+	QTY varchar(2) not null
+);
+
+create table BOOK_RATINGS (
+	USER_ID varchar(10),
+	BOOK_ID varchar(10),
+	RATING varchar(1),
+	constraint RATING_CQ check( RATING > 0 and RATING < 6)
+);

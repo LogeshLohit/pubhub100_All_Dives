@@ -1,0 +1,27 @@
+package com.logesh.firstprg;
+
+
+public class User {
+	
+	void  login(String username, String password)
+	{
+		if (username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")){
+			
+			System.out.println("valid authentication");
+			
+		}
+		else
+		System.out.println("invalid authentication");
+	}
+	}
+
+
+
+package com.logesh.firstprg;
+
+public class TestUser {
+	public static void main(String args[]) {
+		User user = new User();
+		user.login("admin", "ADMIN");
+	}
+}

@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class firClass {
+	public static void main(String[] args) {
+		String[] usernames = { "jobs", "gates", "mark" };
+		String newUser;
+		boolean exists = false;
+		Scanner s = new Scanner(System.in);
+		System.out.println("enter the name");
+		newUser = s.next();
+		for (int i = 0; i < usernames.length; i++) {
+			if (newUser.equals(usernames[i])) {
+				exists = true;
+				break;
+			}
+
+		}
+		try {
+			if (exists) {
+				throw new Exception();
+
+			} else
+				System.out.println("proceed");
+		} catch (Exception e) {
+			System.out.println("exception name already exists");
+		}
+	}
+}

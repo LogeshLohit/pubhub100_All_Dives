@@ -1,0 +1,70 @@
+package modified;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Book {
+	public static void main(String[] args) {
+		
+		System.out.println("Enter 1 to see all the books");
+		System.out.println("Or 2 to add new books");
+		System.out.println("Or 3 to search books:");
+
+		Scanner scanner = new Scanner(System.in);
+		int option = scanner.nextInt();
+
+		ArrayList<String> books = new ArrayList<>();
+		books.add("India2020");
+		books.add("TheJungleBook");
+		books.add("WingsofFire");
+		books.add("SunnyDays");
+		switch (option) {
+		case 1:
+			System.out.println("Already available books:");
+			System.out.println(books);
+			break;
+
+		case 2:
+			System.out.println("Enter book title");
+			String addBook = scanner.next();
+			try {
+				for ( int i = 0; i < books.size(); i++) {
+					if (books.get(i).equalsIgnoreCase(addBook)) {
+						throw new Exception("Book already exists !");
+					}
+				}
+				books.add(addBook);
+				System.out.println(" Book added successfully !");
+				System.out.println(books);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+			break;
+		case 3:
+			int flag = 0;
+			System.out.println("Type the book name to search:");
+			String searchBook = scanner.next();
+			for (int t = 0; t < books.size(); t++) {
+
+				if (books.get(t).equalsIgnoreCase(searchBook)) {
+
+					System.out.println("Book found at column \t" + books.indexOf(searchBook));
+					flag = 1;
+				}
+
+			}
+			try {
+				if (flag == 0) {
+					throw new Exception("Book not found in our system !");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		default:
+			break;
+		}
+
+	}
+
+}

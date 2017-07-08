@@ -1,0 +1,27 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.*;
+public class LoginValidation {
+   public static void main(String args[])
+   {
+       checkUser("abd", "14");
+   }
+ 
+  public static void checkUser(String username,String password){
+       HashMap<String,String> users = new HashMap<>();
+       users.put("abc","1234");
+       users.put("abd","14");
+       users.put("abe","134");
+       String a[] = new String[]{"sed","dea","abf","sep"};
+       List bList = Arrays.asList(a);
+       if (bList.contains(username)) {
+           System.out.println("Block Listed User:"+username);
+       }else {
+           if (users.containsKey(username) && users.containsValue(password)) {
+               System.out.println("login successfully");
+           } else {
+               System.out.println("login not successful");
+           }
+       }
+   }
+}
